@@ -1,5 +1,4 @@
 # coding: utf-8
-from numpy import False_
 from api.Airtable import Airtable
 from api.BetaGouv import BetaGouvStartups
 from utils.Log import Log
@@ -42,7 +41,8 @@ class Startups:
             if id in self.beta_startups.keys() and not self.__same(startup, self.beta_startups[id]):
                 self.airtable.update(
                     startup['airtable_id'], self.beta_startups[id])
-                log.info("- 🔄 Mise à jour : {id} ({diff})".format(id=id, diff=", ".join(self.diff(startup, self.beta_startups[id]))))
+                log.info("- 🔄 Mise à jour : {id} ({diff})".format(
+                    id=id, diff=", ".join(self.diff(startup, self.beta_startups[id]))))
 
     def get_airtable_id(self, id):
         if id in self.airtable_startups.keys():
@@ -61,5 +61,5 @@ class Startups:
         differents_keys = []
         for key in self.fields.keys():
             if s1[key] != s2[key]:
-                differents_keys.append(key) 
+                differents_keys.append(key)
         return differents_keys

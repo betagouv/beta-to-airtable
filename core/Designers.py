@@ -1,5 +1,4 @@
 # coding: utf-8
-from numpy import False_
 from api.Airtable import Airtable
 from api.BetaGouv import BetaGouvMembers
 from utils.Log import Log
@@ -59,11 +58,13 @@ class Designers:
                     # print(record)
                     self.airtable.update(
                         designer['airtable_id'], record)
-                    log.info("- 🔄 Mise à jour : {id} ({diff})".format(id=id, diff=", ".join(self.diff(designer, record))))
+                    log.info("- 🔄 Mise à jour : {id} ({diff})".format(
+                        id=id, diff=", ".join(self.diff(designer, record))))
 
             except KeyError as err:
-                if(id): # ignore empty lines
-                    print("❌ Error: cannot update designer {id}:" . format(id=id))
+                if(id):  # ignore empty lines
+                    print(
+                        "❌ Error: cannot update designer {id}:" . format(id=id))
                     print(err)
 
     def __same(self, d1, d2):
@@ -77,7 +78,7 @@ class Designers:
         differents_keys = []
         for key in self.fields.keys():
             if s1[key] != s2[key]:
-                differents_keys.append(self.fields[key]) 
+                differents_keys.append(self.fields[key])
         return differents_keys
 
     # TODO Code à refactorer
